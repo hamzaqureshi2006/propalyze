@@ -22,7 +22,7 @@ Error boundary, toasts, accessibility checks, E2E smoke tests.
 
 # check list
 
-App skeleton (CRA) + routing
+App skeleton (CRA) + routing ✅
 
 Global Axios instance + React Query
 
