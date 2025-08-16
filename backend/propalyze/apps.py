@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class PropertyanalysisConfig(AppConfig):
+class PropalyzeConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'PropertyAnalysis'
+    name = 'propalyze'
