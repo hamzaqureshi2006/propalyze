@@ -147,7 +147,7 @@ def _get_first_key(record: Dict[str, Any], candidates: List[str]):
             return lower_map[cand.lower()]
     return None
 
-def _collect_photos(record: Dict[str, Any]) -> (List[str], List[str]):
+def _collect_photos(record: Dict[str, Any]) -> (List[str], List[str]): # type: ignore
     """Collect property photos and locality photos from all possible source keys and dedupe."""
     photo_keys = [
         "Project Photos", "ProjectPhotos", "project_photos", "project photos",

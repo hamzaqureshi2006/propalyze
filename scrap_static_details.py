@@ -293,6 +293,58 @@ def scrape_property_details(url):
     return details
 
 
+def clean_property_data(data):
+    def parse_price(price_str):
+        if not price_str:
+            return None
+        price_str = price_str.replace("₹", "").replace(",", "").strip().lower()
+        if "cr" in price_str:
+            return float(price_str.replace("cr", "").strip()) * 1e7
+        elif "lac" in price_str or "lakh" in price_str:
+            return float(price_str.replace("lac", "").replace("lakh", "").strip()) * 1e5
+        try:
+            return float(price_str)
+        except:
+            return None
+
+    def extract_numeric(value):
+        if not value:
+            return None
+        match = re.search(r'[\d,.]+', value.replace(",", ""))
+        return float(match.group()) if match else None
+
+    cleaned_data = data.copy()
+
+    # Clean Carpet Area
+    cleaned_data["Carpet Area (sqft)"] = extract_numeric(cleaned_data.get("Carpet Area", ""))
+
+    # Clean Price Per Sqft
+    cleaned_data["Price Per Sqft"] = extract_numeric(cleaned_data.get("Price Per Sqft", ""))
+
+    # Clean Total Area
+    cleaned_data["Total Area (sqft)"] = extract_numeric(cleaned_data.get("Total Area", ""))
+
+    # Clean Property Price
+    cleaned_data["Price (INR)"] = parse_price(cleaned_data.get("Price", ""))
+
+    yield_val = cleaned_data.get("Property Yield")
+    try:
+        cleaned_data["Property Yield (%)"] = float(yield_val)
+    except (TypeError, ValueError):
+        cleaned_data["Property Yield (%)"] = None
+
+    raw_keys_to_remove = [
+    "Carpet Area",
+    "Price",
+    "Total Area",
+    "Property Yield",
+    ]
+    for key in raw_keys_to_remove:
+        cleaned_data.pop(key, None)
+
+    return cleaned_data
+
+
 url = "https://www.magicbricks.com/propertyDetails/3-BHK-2520-Sq-ft-Multistorey-Apartment-FOR-Sale-Gota-in-Ahmedabad&id=4d423737323832383437"
 property_data = scrape_property_details(url)
 with open("property_details.json", "w") as outfile:
