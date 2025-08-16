@@ -1,0 +1,83 @@
+src/
+  App.js
+  index.js
+  utils/
+    request.js                 # tiny fetch helper (with credentials)
+  context/
+    AuthContext.js             # user object, login(), logout()
+  components/
+    layout/
+      Navbar.js
+      Footer.js
+      Loader.js
+    common/
+      Button.js
+      Input.js
+      Select.js
+      Modal.js
+      Toast.js
+      Tabs.js
+      Table.js
+      EmptyState.js
+      Skeleton.js
+    cards/
+      FeatureCard.js
+      PropertyCard.js
+      LocalityCard.js
+      StatCard.js
+    charts/
+      PriceTrendChart.js
+      ForecastChart.js
+  pages/
+    HomePage.js
+    SearchPage.js
+    PriceEstimatorPage.js
+    InvestmentAdvisorPage.js
+    LocalityAnalyzerPage.js
+    SmartLocationSuggestorPage.js
+    RiskCheckerPage.js
+    ComparePropertiesPage.js
+    UserPortal/
+      UserPortalPage.js
+      SavedSearchesTab.js
+      AlertsTab.js
+      BookmarksTab.js
+      SettingsTab.js
+    Admin/
+      AdminPage.js
+      AdminDashboard.js
+      AdminUpdater.js
+      AdminLogs.js
+    Auth/
+      LoginPage.js
+      SignupPage.js
+
+
+3-Day Build Plan (front-loaded scaffolding)
+
+Day 1
+
+Layout shell: Navbar, Footer, route skeletons, AuthContext
+Home (hero + feature grid), Search page (basic search + dummy results)✅
+
+Implement request.js and /api/me handshake (auth via cookies)
+
+Day 2
+
+Price Estimator (form + result)
+
+Locality Analyzer (form + cards)
+
+Smart Location Suggestor (filters + results)
+
+Day 3
+
+Compare Properties (selectors + table)
+
+Investment Advisor (forecast chart)
+
+User Portal tabs (read-only to start)
+
+Admin skeleton (dashboard + updater + logs)
+
+Polish: empty states, toasts, error handling
